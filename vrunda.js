@@ -6,22 +6,48 @@
 (function () {
   'use strict';
 
-  /* ── 1. DARK MODE — browser/OS decides, no button ───────────── */
+  /* ── 1. DARK MODE ────────────────────────────────────────────── */
+  var darkBtn = document.getElementById('darkToggle');
+
+  // Single source of truth — apply dark class + update button icon
   function setTheme(isDark) {
     document.body.classList.toggle('dark', isDark);
+    if (darkBtn) darkBtn.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('vn-dark', isDark ? '1' : '0');
   }
 
-  // Set on page load
-  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  setTheme(prefersDark);
+  // On page load — use saved choice, else fall back to OS
+  var saved = localStorage.getItem('vn-dark');
+  if (saved === '1')      { setTheme(true);  }
+  else if (saved === '0') { setTheme(false); }
+  else {
+    setTheme(!!(window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches));
+  }
 
-  // Update instantly whenever browser/OS theme changes
+  // Button click — toggle and save
+  if (darkBtn) {
+    darkBtn.addEventListener('click', function () {
+      setTheme(!document.body.classList.contains('dark'));
+    });
+  }
+
+  // Browser/OS theme changes — follow it and save it
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', function (e) {
         setTheme(e.matches);
       });
   }
+
+  // Sync across all open tabs
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'vn-dark') {
+      var isDark = e.newValue === '1';
+      document.body.classList.toggle('dark', isDark);
+      if (darkBtn) darkBtn.textContent = isDark ? '☀️' : '🌙';
+    }
+  });
 
   /* ── 2. PAGE TRANSITION — smooth fade in/out ─────────────── */
   var overlay = document.createElement('div');
