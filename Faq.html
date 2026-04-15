@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Vrunda Natural</title>
+  <meta name="description" content="Frequently asked questions about Vrunda Natural products, quality, shipping, minimum order quantities, payment terms and export process.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── FAQ page extras ── */
+    .faq-hero {
+      position: relative;
+      min-height: 440px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      background:
+        linear-gradient(140deg, rgba(20,50,18,.88) 0%, rgba(46,107,42,.78) 55%, rgba(122,79,40,.65) 100%),
+        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80')
+        center / cover no-repeat;
+      padding: 140px 36px 80px;
+    }
+    .faq-hero-content { position: relative; z-index: 1; max-width: 620px; }
+    .faq-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: #fff; font-weight: 700; line-height: 1.15;
+      margin: 16px 0 18px;
+    }
+    .faq-hero-content h1 em { font-style: italic; color: var(--earth-light); }
+    .faq-hero-content p {
+      color: rgba(255,255,255,.82); font-size: 1.05rem;
+      font-weight: 300; line-height: 1.75;
+    }
+
+    /* Category filter tabs */
+    .faq-tabs {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 44px;
+    }
+    .faq-tab {
+      padding: 9px 20px;
+      border-radius: 99px;
+      border: 2px solid var(--green);
+      background: transparent;
+      color: var(--green);
+      font-family: var(--font-body);
+      font-size: .86rem; font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .faq-tab:hover, .faq-tab.active {
+      background: var(--green); color: #fff;
+    }
+
+    /* FAQ layout: sidebar + accordion */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media(max-width:860px){ .faq-layout { grid-template-columns: 1fr; } }
+
+    /* Sidebar nav */
+    .faq-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+    .faq-sidebar h4 {
+      font-family: var(--font-display);
+      font-size: 1rem; color: var(--text-dark);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--sand-dark);
+    }
+    body.dark .faq-sidebar h4 { color: var(--text-dark); border-color: rgba(255,255,255,.1); }
+    .faq-sidebar ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .faq-sidebar ul li a {
+      display: block; padding: 9px 14px;
+      font-size: .88rem; font-weight: 500;
+      color: var(--text-mid);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all var(--transition);
+      border-left: 3px solid transparent;
+    }
+    .faq-sidebar ul li a:hover {
+      background: var(--green-pale); color: var(--green);
+      border-left-color: var(--green);
+    }
+    @media(max-width:860px){ .faq-sidebar { display:none; } }
+
+    /* Accordion */
+    .faq-category { margin-bottom: 48px; }
+    .faq-category-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem; color: var(--text-dark);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--sand-dark);
+    }
+    body.dark .faq-category-title { color: var(--text-dark); border-color: rgba(255,255,255,.1); }
+    .faq-category-title span { font-size: 1.5rem; }
+
+    .faq-item {
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      background: var(--white);
+      overflow: hidden;
+      transition: box-shadow var(--transition);
+    }
+    body.dark .faq-item { background: #1c2a18; border-color: rgba(255,255,255,.07); }
+    .faq-item:hover { box-shadow: var(--shadow-sm); }
+
+    .faq-question {
+      width: 100%; text-align: left;
+      padding: 18px 22px;
+      background: none; border: none;
+      font-family: var(--font-body);
+      font-size: .97rem; font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      transition: color var(--transition);
+    }
+    body.dark .faq-question { color: var(--text-dark); }
+    .faq-question:hover { color: var(--green); }
+    .faq-item.open .faq-question { color: var(--green); }
+
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      color: var(--green);
+      font-size: .85rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--green); color: #fff;
+    }
+
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0 22px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 600px;
+      padding: 0 22px 20px;
+    }
+    .faq-answer p {
+      font-size: .93rem; color: var(--text-mid);
+      line-height: 1.75; margin-bottom: 10px;
+    }
+    .faq-answer p:last-child { margin-bottom: 0; }
+    .faq-answer ul {
+      list-style: none; margin: 8px 0;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .faq-answer ul li {
+      font-size: .91rem; color: var(--text-mid);
+      padding-left: 18px; position: relative; line-height: 1.65;
+    }
+    .faq-answer ul li::before {
+      content: '✔';
+      position: absolute; left: 0;
+      color: var(--green); font-size: .8rem;
+    }
+    .faq-answer a { color: var(--green); font-weight: 600; text-decoration: none; }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    /* Search box */
+    .faq-search-wrap { max-width: 520px; margin: 0 auto 44px; }
+    .faq-search-wrap .form-group { margin: 0; }
+    .faq-search-wrap input { font-size: 1rem; padding: 14px 18px; }
+
+    @media(max-width:768px){
+      .faq-hero { padding: 120px 20px 60px; min-height: 360px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-inner">
+    <img src="logo.jpeg" alt="Vrunda Natural" class="loader-logo-img" onerror="this.style.display='none'">
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="Vrunda_Natural/logo.jpeg" alt="Vrunda Natural" class="logo-img" onerror="this.style.display='none'">
+    </a>
+    <nav id="desktopNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="has-dropdown">
+          <a href="index.html#products">Products ▾</a>
+          <ul class="dropdown">
+            <li><a href="index.html#herbal">🌿 Herbal Extracts</a></li>
+            <li><a href="index.html#spices">🌶️ Spices</a></li>
+            <li><a href="index.html#dryfruits">🥜 Dry Fruits</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="faq.html" class="active-link">FAQ</a></li>
+        <li><a href="careers.html" class="nav-careers">Careers</a></li>
+        <li><a href="enquiry.html" class="nav-careers" style="background:var(--green)!important;">Get a Quote</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul>
+      <li><a href="index.html"           onclick="closeMobileNav()">Home</a></li>
+      <li><a href="about.html"           onclick="closeMobileNav()">About</a></li>
+      <li><a href="index.html#herbal"    onclick="closeMobileNav()">Herbal Extracts</a></li>
+      <li><a href="index.html#spices"    onclick="closeMobileNav()">Spices</a></li>
+      <li><a href="index.html#dryfruits" onclick="closeMobileNav()">Dry Fruits</a></li>
+      <li><a href="faq.html"             onclick="closeMobileNav()">FAQ</a></li>
+      <li><a href="careers.html"         onclick="closeMobileNav()">Careers</a></li>
+      <li><a href="enquiry.html"         onclick="closeMobileNav()">Get a Quote</a></li>
+      <li><a href="index.html#contact"   onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="faq-hero">
+  <div class="faq-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);">Help Centre</span>
+    <h1>Frequently Asked <em>Questions</em></h1>
+    <p>Everything you need to know about our products, orders, shipping and more.</p>
+  </div>
+</div>
+
+<!-- FAQ CONTENT -->
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Quick Answers</span>
+    <h2>Find Your Answer</h2>
+    <p class="section-sub">Browse by category or search below</p>
+  </div>
+
+  <!-- Search -->
+  <div class="faq-search-wrap">
+    <div class="form-group">
+      <input type="text" id="faqSearch" placeholder="🔍  Search questions…" oninput="filterFAQ(this.value)">
+    </div>
+  </div>
+
+  <!-- Category tabs -->
+  <div class="faq-tabs">
+    <button class="faq-tab active" onclick="filterByTab(this,'all')">All</button>
+    <button class="faq-tab" onclick="filterByTab(this,'quality')">Quality &amp; Certifications</button>
+    <button class="faq-tab" onclick="filterByTab(this,'moq')">Min. Order Quantity</button>
+    <button class="faq-tab" onclick="filterByTab(this,'shipping')">Shipping &amp; Delivery</button>
+    <button class="faq-tab" onclick="filterByTab(this,'custom')">Custom &amp; Packaging</button>
+    <button class="faq-tab" onclick="filterByTab(this,'export')">Export &amp; Import</button>
+  </div>
+
+  <div class="faq-layout">
+
+    <!-- Sidebar -->
+    <div class="faq-sidebar">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#quality">🔬 Quality &amp; Certifications</a></li>
+        <li><a href="#moq">📦 Min. Order Quantity</a></li>
+        <li><a href="#shipping">🚚 Shipping &amp; Delivery</a></li>
+        <li><a href="#custom">🎁 Custom &amp; Packaging</a></li>
+        <li><a href="#export">🌍 Export &amp; Import</a></li>
+      </ul>
+    </div>
+
+    <!-- Accordion -->
+    <div id="faqAccordion">
+
+      <!-- QUALITY & CERTIFICATIONS -->
+      <div class="faq-category" data-cat="quality" id="quality">
+        <h3 class="faq-category-title"><span>🔬</span> Quality &amp; Certifications</h3>
+
+        <div class="faq-item" data-cat="quality">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What quality standards do your products meet?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>All Vrunda Natural products are manufactured and processed following international quality standards. Our facility follows ISO-certified processes, and every batch undergoes multi-stage quality checks including:</p>
+            <ul>
+              <li>Physical and organoleptic testing (colour, odour, texture)</li>
+              <li>Microbial safety testing (TPC, yeast, mould, pathogens)</li>
+              <li>Heavy metal screening</li>
+              <li>Active compound / potency verification</li>
+            </ul>
+            <p>We provide a Certificate of Analysis (COA) with every shipment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="quality">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Do you provide a Certificate of Analysis (COA)?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. A detailed Certificate of Analysis is provided with every order. The COA includes batch number, test parameters, results and expiry date. We can also provide MSDS (Material Safety Data Sheet) and other technical documents on request.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="quality">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Are your products organic certified?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Selected products in our range are available with organic certification. Please specify during your enquiry if you require certified organic products, and our team will confirm availability and any additional requirements.</p>
+            <p>We can also assist with FSSAI, phytosanitary certificates and other country-specific documentation as needed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="quality">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Can I request a sample before placing a bulk order?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely. We encourage sample orders before bulk commitments. Sample quantities (typically under 1 kg) can be arranged for most products. Please <a href="enquiry.html">submit a sample request</a> and our team will get back to you with details on pricing and courier options.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MINIMUM ORDER QUANTITY -->
+      <div class="faq-category" data-cat="moq" id="moq">
+        <h3 class="faq-category-title"><span>📦</span> Minimum Order Quantity</h3>
+
+        <div class="faq-item" data-cat="moq">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What is the minimum order quantity (MOQ)?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>MOQ varies by product category:</p>
+            <ul>
+              <li>Herbal Extracts — minimum 5 kg per product</li>
+              <li>Spices — minimum 10 kg per product</li>
+              <li>Dry Fruits — minimum 10 kg per product</li>
+            </ul>
+            <p>For samples or trial orders, smaller quantities may be possible. Contact us to discuss your specific needs.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="moq">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Can I order multiple products together?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, mixed orders are welcome. You can combine different products in a single shipment to meet overall order requirements. Our team will help you plan the best combination to optimise shipping costs.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="moq">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Do you offer better pricing for larger orders?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. We offer tiered pricing based on order volume. The larger your order, the more competitive the per-kg price. Please <a href="enquiry.html">request a quote</a> with your estimated quantity and we'll provide a detailed pricing breakdown.</p>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- SHIPPING & DELIVERY -->
+      <div class="faq-category" data-cat="shipping" id="shipping">
+        <h3 class="faq-category-title"><span>🚚</span> Shipping &amp; Delivery</h3>
+
+        <div class="faq-item" data-cat="shipping">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How long does delivery take?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Delivery timelines depend on order size and destination:</p>
+            <ul>
+              <li>Domestic (India) — 3 to 7 business days after dispatch</li>
+              <li>International (Air freight) — 5 to 10 business days</li>
+              <li>International (Sea freight) — 20 to 45 days depending on destination port</li>
+            </ul>
+            <p>Processing and packing typically takes 2–5 business days after order confirmation and payment receipt.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="shipping">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Do you ship internationally?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, we export to over 10 countries including the USA, UK, Germany, Australia, Canada, UAE, Singapore, Japan, Netherlands and South Africa. We handle all export documentation including COA, packing list, commercial invoice and phytosanitary certificates.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="shipping">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Who bears the shipping cost?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Shipping terms (Incoterms) are agreed upon at the time of order. Common terms we work with include:</p>
+            <ul>
+              <li><strong>EXW</strong> — buyer arranges pickup from our facility</li>
+              <li><strong>FOB</strong> — we deliver to the port of origin</li>
+              <li><strong>CIF</strong> — we cover cost, insurance and freight to destination port</li>
+            </ul>
+            <p>We can help arrange competitive freight rates through our logistics partners if needed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="shipping">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Can I track my order?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Once your order is dispatched, we share the tracking number and courier details via email. For export shipments, we provide the Bill of Lading or Airway Bill number so you can track the shipment through the carrier's website.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CUSTOM ORDERS & PACKAGING -->
+      <div class="faq-category" data-cat="custom" id="custom">
+        <h3 class="faq-category-title"><span>🎁</span> Custom Orders &amp; Packaging</h3>
+
+        <div class="faq-item" data-cat="custom">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Can I get products with custom / private label packaging?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, we offer private label and custom packaging services for eligible orders. You can provide your brand name, logo and label design, and we'll pack the product accordingly. Minimum quantities apply for custom packaging — please <a href="enquiry.html">contact us</a> for details.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="custom">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What packaging options are available?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>We offer a range of food-grade, export-compliant packaging options:</p>
+            <ul>
+              <li>HDPE drums (5 kg, 10 kg, 25 kg)</li>
+              <li>Aluminium foil pouches (100 g to 5 kg)</li>
+              <li>Kraft paper bags with inner liner (10 kg, 25 kg)</li>
+              <li>Custom-branded pouches or boxes (MOQ applies)</li>
+            </ul>
+            <p>All packaging is designed to preserve freshness, prevent moisture and comply with international food safety standards.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="custom">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Can you produce a product to a custom specification?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>For certain herbal extracts and spice blends, we can work to custom specifications — including specific particle size, moisture content, standardised active compound percentages, or unique blends. Please share your technical specification sheet when submitting an enquiry and our R&amp;D team will review feasibility.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- EXPORT & IMPORT PROCESS -->
+      <div class="faq-category" data-cat="export" id="export">
+        <h3 class="faq-category-title"><span>🌍</span> Export &amp; Import Process</h3>
+
+        <div class="faq-item" data-cat="export">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What documents do you provide for export orders?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>For all export orders, we provide a complete documentation set including:</p>
+            <ul>
+              <li>Commercial Invoice &amp; Packing List</li>
+              <li>Certificate of Analysis (COA)</li>
+              <li>Phytosanitary Certificate (where required)</li>
+              <li>Certificate of Origin</li>
+              <li>MSDS (Material Safety Data Sheet)</li>
+              <li>Bill of Lading / Airway Bill</li>
+              <li>Any country-specific certificates on request</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="export">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Which countries do you currently export to?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>We currently export to: USA, UK, Germany, Australia, Canada, UAE, Singapore, Japan, Netherlands and South Africa. If your country is not listed, please get in touch — we are actively expanding our export reach and may still be able to assist.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="export">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Do I need an import licence to buy from you?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Import licence requirements depend on your country's regulations for food and herbal products. We recommend checking with your local customs authority or import agent. Our team can share product HS codes, COA and other technical documents that may assist with the import clearance process in your country.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="export">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How do I start the export process with Vrunda Natural?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer">
+            <p>Getting started is simple:</p>
+            <ul>
+              <li>Step 1 — <a href="enquiry.html">Submit an enquiry</a> with product name, quantity and destination country</li>
+              <li>Step 2 — Receive a quotation within 24 hours</li>
+              <li>Step 3 — Confirm order and make advance payment</li>
+              <li>Step 4 — We process, pack and ship with full documentation</li>
+              <li>Step 5 — Receive tracking details and delivery confirmation</li>
+            </ul>
+            <p>Our team will guide you through every step of the process.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- end accordion -->
+  </div><!-- end faq-layout -->
+</section>
+
+<!-- STILL HAVE QUESTIONS BAND -->
+<div class="stats-strip reveal" style="background:var(--earth);">
+  <div style="grid-column:1/-1;text-align:center;max-width:580px;margin:0 auto;">
+    <p style="font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);color:#fff;font-weight:700;margin-bottom:8px;">
+      Didn't find your answer?
+    </p>
+    <p style="color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:24px;">
+      Our team is happy to help — send us your question directly.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="enquiry.html" class="btn btn-primary">Send an Enquiry</a>
+      <a href="https://wa.me/919819115849" target="_blank" class="btn btn-ghost">WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Vrunda_Natural/logo.jpeg" alt="Vrunda Natural" class="footer-logo-img" onerror="this.style.display='none'">
+      <p class="footer-tagline">Pure Nature &amp; proven prosperity</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="enquiry.html">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="index.html#herbal">Herbal Extracts</a></li>
+        <li><a href="index.html#spices">Spices</a></li>
+        <li><a href="index.html#dryfruits">Dry Fruits</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h5>Contact</h5>
+      <p>Vishnu Nagar, Dombivli (W)<br>Maharashtra, India</p>
+      <p><a href="tel:+917039655835">+91 70396 55835</a></p>
+      <p><a href="mailto:info@vrundalnatural.com"><span class="__cf_email__" data-cfemail="751c1b131a350307001b11141b1401000714195b161a18">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Vrunda Natural Pvt Ltd. All rights reserved.</p>
+    <p>Designed with ♥ for nature lovers</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/917039655835" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── Toggle FAQ accordion item ── */
+  window.toggleFAQ = function (btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function (el) {
+      el.classList.remove('open');
+    });
+    if (!isOpen) item.classList.add('open');
+  };
+
+  /* ── Filter by category tab ── */
+  window.filterByTab = function (btn, cat) {
+    document.querySelectorAll('.faq-tab').forEach(function (t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    var searchEl = document.getElementById('faqSearch');
+    if (searchEl) searchEl.value = '';
+    document.querySelectorAll('.faq-category').forEach(function (cat_el) {
+      cat_el.style.display = (cat === 'all' || cat_el.dataset.cat === cat) ? '' : 'none';
+    });
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      item.style.display = '';
+    });
+  };
+
+  /* ── Search filter ── */
+  window.filterFAQ = function (query) {
+    document.querySelectorAll('.faq-tab').forEach(function (t) { t.classList.remove('active'); });
+    var firstTab = document.querySelector('.faq-tab');
+    if (firstTab) firstTab.classList.add('active');
+    document.querySelectorAll('.faq-category').forEach(function (cat_el) { cat_el.style.display = ''; });
+
+    query = query ? query.toLowerCase().trim() : '';
+
+    if (!query) {
+      document.querySelectorAll('.faq-item').forEach(function (item) { item.style.display = ''; });
+      return;
+    }
+
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var text = item.textContent.toLowerCase();
+      item.style.display = text.indexOf(query) !== -1 ? '' : 'none';
+    });
+
+    // Hide categories where all items are hidden
+    document.querySelectorAll('.faq-category').forEach(function (cat_el) {
+      var anyVisible = false;
+      cat_el.querySelectorAll('.faq-item').forEach(function (item) {
+        if (item.style.display !== 'none') anyVisible = true;
+      });
+      cat_el.style.display = anyVisible ? '' : 'none';
+    });
+  };
+
+  /* ── Sidebar smooth scroll ── */
+  document.querySelectorAll('.faq-sidebar a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+})();
+</script>
+
+<script src="vrunda.js"></script>
+</body>
+</html>

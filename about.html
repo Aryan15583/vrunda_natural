@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Vrunda Natural</title>
+  <meta name="description" content="Learn about Vrunda Natural — our mission, vision, sourcing process, manufacturing, and the countries we export to.">
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── About-page only extras ── */
+    .about-hero {
+      position: relative;
+      min-height: 520px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      background:
+        linear-gradient(140deg, rgba(20,50,18,.88) 0%, rgba(46,107,42,.78) 55%, rgba(122,79,40,.65) 100%),
+        url('https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=1400&q=80')
+        center / cover no-repeat;
+      padding: 140px 36px 80px;
+    }
+    .about-hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .about-hero-content h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: #fff; font-weight: 700; line-height: 1.15;
+      margin: 16px 0 18px;
+    }
+    .about-hero-content h1 em { font-style: italic; color: var(--earth-light); }
+    .about-hero-content p {
+      color: rgba(255,255,255,.82); font-size: 1.05rem;
+      font-weight: 300; line-height: 1.75; margin-bottom: 32px;
+    }
+
+    /* Mission / Vision cards */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media(max-width:640px){ .mv-grid { grid-template-columns: 1fr; } }
+    .mv-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    body.dark .mv-card { background: #1c2a18; border-color: rgba(255,255,255,.06); }
+    .mv-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .mv-icon { font-size: 2.4rem; display: block; margin-bottom: 16px; }
+    .mv-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem; color: var(--green); margin-bottom: 12px;
+    }
+    .mv-card p { font-size: .95rem; color: var(--text-mid); line-height: 1.75; }
+
+    /* Process steps */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 48px; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green-pale), var(--green), var(--green-pale));
+      z-index: 0;
+    }
+    @media(max-width:640px){ .process-steps::before { display:none; } }
+    .step {
+      position: relative; z-index: 1;
+      text-align: center; padding: 0 16px 28px;
+    }
+    .step-num {
+      width: 54px; height: 54px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 700;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 4px 16px rgba(46,107,42,.35);
+      border: 4px solid var(--cream);
+    }
+    body.dark .step-num { border-color: var(--cream); }
+    .step h4 {
+      font-family: var(--font-display);
+      font-size: 1rem; color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    body.dark .step h4 { color: var(--text-dark); }
+    .step p { font-size: .86rem; color: var(--text-light); line-height: 1.65; }
+
+    /* Export map section */
+    .export-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .country-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-xs);
+      font-size: .88rem; font-weight: 600;
+      color: var(--text-mid);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    body.dark .country-chip { background: #1c2a18; border-color: rgba(255,255,255,.06); color: var(--text-mid); }
+    .country-chip:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .country-chip .flag { font-size: 1.4rem; line-height: 1; }
+
+    /* Values strip */
+    .values-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .value-item {
+      text-align: center; padding: 28px 20px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: var(--shadow-xs);
+    }
+    body.dark .value-item { background: #1c2a18; border-color: rgba(255,255,255,.05); }
+    .value-item .v-icon { font-size: 2rem; display: block; margin-bottom: 12px; }
+    .value-item h5 {
+      font-family: var(--font-display);
+      font-size: .97rem; color: var(--green); margin-bottom: 6px;
+    }
+    .value-item p { font-size: .83rem; color: var(--text-light); }
+
+    @media(max-width:768px){
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .about-hero { padding: 120px 20px 60px; min-height: 420px; }
+    }
+    @media(max-width:480px){
+      .process-steps { grid-template-columns: 1fr; }
+    }
+
+    /* ── Leadership / Founder Section ── */
+    .leadership-section {
+      background: var(--sand);
+      border-radius: var(--radius-xl);
+      margin: 0 24px;
+    }
+    .leadership-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .leader-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .leader-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--green), var(--earth));
+    }
+    body.dark .leader-card { background: #1c2a18; border-color: rgba(255,255,255,.07); }
+    .leader-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+    .leader-avatar {
+      width: 120px; height: 120px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-pale) 0%, var(--sand) 100%);
+      border: 4px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 6px 24px rgba(46,107,42,.2);
+      overflow: hidden;
+    }
+    .leader-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .leader-info { flex: 1; }
+
+    .leader-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--green), #3a8c35);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .leader-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    body.dark .leader-card h3 { color: #e8f5e4; }
+    .leader-card .leader-title {
+      font-size: .88rem;
+      color: var(--earth);
+      font-weight: 600;
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .leader-divider {
+      width: 40px; height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--earth));
+      margin-bottom: 14px;
+      border-radius: 2px;
+    }
+    .leader-card p {
+      font-size: .9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      max-width: 620px;
+    }
+    .leader-socials {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+    }
+    .leader-social-link {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(46,107,42,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      color: var(--green);
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .leader-social-link:hover {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    @media(max-width:640px){
+      .leadership-section { margin: 0 12px; }
+      .leader-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+        gap: 20px;
+      }
+      .leader-card::before {
+        top: 0; left: 0; right: 0; bottom: auto;
+        width: auto; height: 4px;
+        background: linear-gradient(90deg, var(--green), var(--earth));
+      }
+      .leader-divider { margin: 0 auto 14px; }
+      .leader-socials { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LOADER
+══════════════════════════════════════════ -->
+<div id="loader">
+  <div class="loader-inner">
+    <img src="logo.jpeg" alt="Vrunda Natural" class="loader-logo-img"
+         onerror="this.style.display='none'">
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════ -->
+<header id="mainHeader">
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      <img src="Vrunda_Natural/logo.jpeg" alt="Vrunda Natural" class="logo-img"
+           onerror="this.style.display='none'">
+    </a>
+
+    <nav id="desktopNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active-link">About</a></li>
+        <li class="has-dropdown">
+          <a href="index.html#products">Products ▾</a>
+          <ul class="dropdown">
+            <li><a href="index.html#herbal">🌿 Herbal Extracts</a></li>
+            <li><a href="index.html#spices">🌶️ Spices</a></li>
+            <li><a href="index.html#dryfruits">🥜 Dry Fruits</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#videos">Videos</a></li>
+        <li><a href="careers.html" class="nav-careers">Careers</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul>
+      <li><a href="index.html"           onclick="closeMobileNav()">Home</a></li>
+      <li><a href="about.html"           onclick="closeMobileNav()">About</a></li>
+      <li><a href="index.html#herbal"    onclick="closeMobileNav()">Herbal Extracts</a></li>
+      <li><a href="index.html#spices"    onclick="closeMobileNav()">Spices</a></li>
+      <li><a href="index.html#dryfruits" onclick="closeMobileNav()">Dry Fruits</a></li>
+      <li><a href="index.html#gallery"   onclick="closeMobileNav()">Gallery</a></li>
+      <li><a href="index.html#videos"    onclick="closeMobileNav()">Videos</a></li>
+      <li><a href="careers.html"         onclick="closeMobileNav()">Careers</a></li>
+      <li><a href="index.html#contact"   onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<div class="about-hero">
+  <div class="about-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);">Our Story</span>
+    <h1>Rooted in Nature,<br><em>Driven by Purpose</em></h1>
+    <p>From farm to finish — Vrunda Natural Pvt Ltd brings the finest herbal extracts,<br>spices and dry fruits to markets across the world.</p>
+    <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     INTRO + LOGO
+══════════════════════════════════════════ -->
+<section id="about-intro" class="section reveal"
+         style="background:var(--sand);border-radius:var(--radius-xl);margin:40px 24px 0;">
+  <div class="about-inner">
+    <div class="about-logo-col">
+      <div class="about-logo-frame">
+        <img src="Vrunda_Natural/logo.jpeg" alt="Vrunda Natural Logo" class="about-logo">
+      </div>
+    </div>
+    <div class="about-content">
+      <span class="section-tag">Who We Are</span>
+      <h2>About Vrunda Natural</h2>
+      <p>Vrunda Natural Pvt Ltd is a trusted supplier of premium herbal extracts, spices and dry fruits sourced from the finest natural origins across India and beyond. Founded with a passion for purity and wellness, we have built our reputation on one simple promise — delivering nature's best, exactly as it should be.</p>
+      <p>Headquartered in Dombivli, Maharashtra, our team of experts oversees every step of the journey — from careful farm-level sourcing to rigorous quality checks — ensuring every batch meets international standards before it reaches you.</p>
+      <div class="about-highlights">
+        <div class="highlight"><span>✔</span> ISO Certified Processes</div>
+        <div class="highlight"><span>✔</span> 100% Natural &amp; Pure</div>
+        <div class="highlight"><span>✔</span> Export Quality Standards</div>
+        <div class="highlight"><span>✔</span> Direct Farm Sourcing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
+<div class="stats-strip reveal">
+  <div class="stat">
+    <span class="stat-num">15+</span>
+    <span class="stat-label">Products</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Natural</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">10+</span>
+    <span class="stat-label">Countries Served</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">10+</span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MISSION & VISION
+══════════════════════════════════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">What Drives Us</span>
+    <h2>Mission &amp; Vision</h2>
+    <p class="section-sub">Two guiding principles behind every decision we make</p>
+  </div>
+  <div class="mv-grid">
+    <div class="mv-card">
+      <span class="mv-icon">🎯</span>
+      <h3>Our Mission</h3>
+      <p>To bridge the gap between nature's bounty and global wellness by supplying premium-quality herbal extracts, spices and dry fruits — with uncompromising purity, transparency and care at every step of the supply chain.</p>
+      <p style="margin-top:14px;">We exist to make the goodness of nature accessible to businesses and consumers worldwide, while supporting the farmers and communities that make it possible.</p>
+    </div>
+    <div class="mv-card">
+      <span class="mv-icon">🌏</span>
+      <h3>Our Vision</h3>
+      <p>To become a globally recognised name in natural ingredient supply — known not just for the quality of our products, but for the integrity of our processes and the trust we build with every partner.</p>
+      <p style="margin-top:14px;">We envision a world where clean, traceable, nature-sourced ingredients are the standard — and we are committed to leading that change from India to the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CORE VALUES
+══════════════════════════════════════════ -->
+<section class="section reveal" style="background:var(--sand);border-radius:var(--radius-xl);margin:0 24px;">
+  <div class="section-header">
+    <span class="section-tag">What We Stand For</span>
+    <h2>Our Core Values</h2>
+    <p class="section-sub">The principles that guide every batch, every deal and every relationship</p>
+  </div>
+  <div class="values-strip">
+    <div class="value-item">
+      <span class="v-icon">🌿</span>
+      <h5>Purity</h5>
+      <p>No additives, no shortcuts — only what nature intended.</p>
+    </div>
+    <div class="value-item">
+      <span class="v-icon">🔬</span>
+      <h5>Quality</h5>
+      <p>Rigorous testing at every stage, meeting global standards.</p>
+    </div>
+    <div class="value-item">
+      <span class="v-icon">🤝</span>
+      <h5>Trust</h5>
+      <p>Long-term partnerships built on honesty and consistency.</p>
+    </div>
+    <div class="value-item">
+      <span class="v-icon">♻️</span>
+      <h5>Sustainability</h5>
+      <p>Responsible sourcing that respects people and planet.</p>
+    </div>
+    <div class="value-item">
+      <span class="v-icon">📦</span>
+      <h5>Reliability</h5>
+      <p>On-time delivery, every time, anywhere in the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW WE SOURCE
+══════════════════════════════════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Farm to Finish</span>
+    <h2>How We Source Our Products</h2>
+    <p class="section-sub">Every ingredient starts with a relationship — with the land and with the farmer</p>
+  </div>
+  <div class="about-inner" style="grid-template-columns:1fr 1fr;gap:56px;align-items:start;">
+    <div>
+      <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
+           alt="Farm sourcing"
+           style="width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;height:340px;">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;justify-content:center;">
+      <div class="highlight" style="flex-direction:column;align-items:flex-start;padding:20px 22px;gap:8px;">
+        <strong style="color:var(--green);font-size:1rem;">🌾 Direct Farm Partnerships</strong>
+        <p style="font-size:.9rem;color:var(--text-mid);font-weight:400;margin:0;">We work directly with verified farmers and cooperatives across India — eliminating middlemen and ensuring fair pricing at the source.</p>
+      </div>
+      <div class="highlight" style="flex-direction:column;align-items:flex-start;padding:20px 22px;gap:8px;">
+        <strong style="color:var(--green);font-size:1rem;">🔍 Field Inspection</strong>
+        <p style="font-size:.9rem;color:var(--text-mid);font-weight:400;margin:0;">Our sourcing team conducts on-site visits to verify growing conditions, harvest practices and initial quality before any procurement begins.</p>
+      </div>
+      <div class="highlight" style="flex-direction:column;align-items:flex-start;padding:20px 22px;gap:8px;">
+        <strong style="color:var(--green);font-size:1rem;">📋 Traceability</strong>
+        <p style="font-size:.9rem;color:var(--text-mid);font-weight:400;margin:0;">Every batch is fully traceable — from the farm of origin to the final shipment, giving our buyers complete confidence in what they receive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MANUFACTURING PROCESS
+══════════════════════════════════════════ -->
+<section class="section reveal" style="background:var(--sand);border-radius:var(--radius-xl);margin:0 24px;">
+  <div class="section-header">
+    <span class="section-tag">Our Process</span>
+    <h2>Manufacturing &amp; Processing</h2>
+    <p class="section-sub">A carefully controlled journey from raw ingredient to export-ready product</p>
+  </div>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Raw Material Intake</h4>
+      <p>Incoming materials are weighed, logged and sent for initial quality inspection before entering the facility.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Cleaning &amp; Sorting</h4>
+      <p>All raw materials are thoroughly cleaned, sorted and graded to remove impurities and ensure consistency.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Extraction / Processing</h4>
+      <p>Using carefully controlled methods — drying, grinding, extraction or standardisation — to preserve active compounds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Quality Testing</h4>
+      <p>Every batch is lab-tested for purity, potency, microbial safety and compliance with international standards.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <h4>Packaging</h4>
+      <p>Products are packed in food-grade, export-compliant packaging that preserves freshness and shelf life.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <h4>Dispatch &amp; Export</h4>
+      <p>Ready shipments are dispatched with full documentation — COA, MSDS, phytosanitary certificates and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXPORT COUNTRIES
+══════════════════════════════════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Global Reach</span>
+    <h2>Countries We Export To</h2>
+    <p class="section-sub">Delivering the goodness of India to over 10 countries across the globe</p>
+  </div>
+  <div class="export-grid">
+    <div class="country-chip"><span class="flag">US</span> United States</div>
+    <div class="country-chip"><span class="flag">GB</span> United Kingdom</div>
+    <div class="country-chip"><span class="flag">DE</span> Germany</div>
+    <div class="country-chip"><span class="flag">AU</span> Australia</div>
+    <div class="country-chip"><span class="flag">Ca</span> Canada</div>
+    <div class="country-chip"><span class="flag">AE</span> UAE</div>
+    <div class="country-chip"><span class="flag">SG</span> Singapore</div>
+    <div class="country-chip"><span class="flag">JP</span> Japan</div>
+    <div class="country-chip"><span class="flag">JN</span> Vietnam</div>
+    <div class="country-chip"><span class="flag">MY</span> Malaysia</div>
+    <div class="country-chip"><span class="flag">NL</span> Netherlands</div>
+    <div class="country-chip"><span class="flag">ZA</span> South Africa</div>
+  </div>
+  <p class="note" style="margin-top:32px;">✦ Interested in importing? <a href="index.html#contact" style="color:var(--green);font-weight:600;">Contact us for export enquiries →</a></p>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CTA BAND
+══════════════════════════════════════════ -->
+<div class="stats-strip reveal" style="background:var(--earth);padding:52px 36px;">
+  <div style="grid-column:1/-1;text-align:center;max-width:640px;margin:0 auto;">
+    <p style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);color:#fff;font-weight:700;margin-bottom:18px;font-style:italic;">
+      "Ready to bring nature's finest to your business?"
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html#products" class="btn btn-ghost">Explore Products</a>
+      <a href="index.html#contact"  class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LEADERSHIP — FOUNDER & DIRECTOR
+══════════════════════════════════════════ -->
+<section class="section reveal leadership-section">
+  <div class="section-header">
+    <span class="section-tag">The People Behind the Brand</span>
+    <h2>Founder &amp; Director</h2>
+    <p class="section-sub">Visionary leaders who built Vrunda Natural from the ground up</p>
+  </div>
+
+  <div class="leadership-grid">
+
+    <!-- Card 1 — Founder 
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="Vrunda_Natural/janhavi sawant.jpg" alt="Founder"
+             onerror="this.style.display='none';this.parentElement.innerHTML='👤';">
+      </div>
+      <div class="leader-info">
+        <span class="leader-badge">Founder</span>
+        <h3>Name Here</h3>
+        <p class="leader-title">Founder &amp; CEO</p>
+        <div class="leader-divider"></div>
+        <p>A passionate advocate for natural wellness, Janhavi Sawant founded Vrunda Natural with a vision to connect India's finest ingredients with the global market. With deep roots in agriculture and a drive for quality, they laid the foundation for everything we stand for today.</p>
+        <div class="leader-socials">
+          <a href="#" class="leader-social-link" aria-label="LinkedIn" title="LinkedIn">in</a>
+          <a href="/cdn-cgi/l/email-protection#2841464e47685e5a5d464c4946495c5d5a4944064b4745" class="leader-social-link" aria-label="Email" title="Email">✉</a>
+        </div>
+      </div>
+    </div> -->  
+
+    <!-- Card 2 — Director -->
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="Vrunda_Natural/darshan sawant.jpg" alt="Director"
+             onerror="this.style.display='none';this.parentElement.innerHTML='👤';">
+      </div>
+      <div class="leader-info">
+        <span class="leader-badge">Director</span>
+        <h3>Mr. Darshan Sawant</h3>
+        <p class="leader-title">Director &amp; Head of Operations</p>
+        <div class="leader-divider"></div>
+        <p>Overseeing day-to-day operations and global partnerships, Darshan Sawant brings expertise in supply chain management and international trade. Their commitment to excellence ensures every shipment from Vrunda Natural meets the highest standards our clients expect.</p>
+        <div class="leader-socials">
+          <a href="https://www.linkedin.com/in/darshan-sawant-1621a111" class="leader-social-link" aria-label="LinkedIn" title="LinkedIn">in</a>
+          <a href="mailto:vrundanatural@gmail.com" class="leader-social-link" aria-label="Email" title="Email">✉</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Vrunda_Natural/logo.jpeg" alt="Vrunda Natural" class="footer-logo-img"
+           onerror="this.style.display='none'">
+      <p class="footer-tagline">Pure Nature &amp; proven prosperity</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="index.html#herbal">Herbal Extracts</a></li>
+        <li><a href="index.html#spices">Spices</a></li>
+        <li><a href="index.html#dryfruits">Dry Fruits</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h5>Contact</h5>
+      <p>Vishnu Nagar, Dombivli (W)<br>Maharashtra, India</p>
+      <p><a href="tel:+917039655835">+91 70396 55835</a></p>
+      <p><a href="mailto:info@vrundalnatural.com"><span class="__cf_email__" data-cfemail="7e171018113e080c0b101a1f101f0a0b0c1f12501d1113">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Vrunda Natural Pvt Ltd. All rights reserved.</p>
+    <p>Designed with ♥ for nature lovers</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     WHATSAPP
+══════════════════════════════════════════ -->
+<a href="https://wa.me/917039655835" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="vrunda.js"></script>
+</body>
+</html>

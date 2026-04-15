@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | Vrunda Natural</title>
+  <meta name="description" content="Join the Vrunda Natural team. Explore career opportunities in herbal extracts, spices and dry fruits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Careers page only — no footer/form overrides (handled by style.css) */
+    .admin-wrap      { max-width:var(--max-width);margin:0 auto;padding:60px 36px 80px; }
+    .admin-divider   { border:none;border-top:2px dashed var(--sand-dark);margin:40px 0 0; }
+    body.dark .admin-divider { border-color:#2a3826; }
+    .admin-panel-hdr { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px; }
+    .admin-panel-hdr h2 { font-family:var(--font-display);font-size:1.9rem;color:var(--text-dark); }
+    .admin-badge     { display:inline-block;background:var(--green);color:#fff;border-radius:99px;padding:3px 14px;font-size:.82rem;font-weight:700;margin-left:10px;vertical-align:middle; }
+    .btn-danger      { background:#c0392b!important;color:#fff!important;border-color:#c0392b!important; }
+    .btn-danger:hover{ background:#962d22!important; }
+    .table-scroll    { overflow-x:auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md); }
+    .sub-table       { width:100%;border-collapse:collapse;font-size:.84rem;background:var(--white);min-width:900px; }
+    body.dark .sub-table { background:#1c2a18; }
+    .sub-table thead tr { background:var(--green); }
+    .sub-table th    { padding:13px 16px;text-align:left;color:#fff;font-weight:700;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap; }
+    .sub-table td    { padding:12px 16px;border-bottom:1px solid var(--sand-dark);color:var(--text-dark);vertical-align:top; }
+    body.dark .sub-table td { border-color:rgba(255,255,255,.07); }
+    .sub-table tbody tr:hover { background:var(--sand); }
+    body.dark .sub-table tbody tr:hover { background:#243020; }
+    .no-rows td      { text-align:center;padding:48px;color:var(--text-light);font-style:italic; }
+    .tbl-link        { color:var(--green);text-decoration:none; }
+    .tbl-link:hover  { text-decoration:underline; }
+    .del-btn         { background:none;border:none;cursor:pointer;color:#c0392b;font-size:.82rem;padding:4px 8px;border-radius:6px;font-family:var(--font-body);transition:background .2s; }
+    .del-btn:hover   { background:#fdecea; }
+  </style>
+</head>
+<body>
+
+<div id="vn-toast" role="alert" aria-live="assertive">
+  <span id="vn-toast-icon"></span>
+  <span id="vn-toast-msg"></span>
+  <button id="vn-toast-close" aria-label="Dismiss">✕</button>
+</div>
+
+<div id="loader">
+  <div class="loader-inner">
+    <img src="logo.jpeg" alt="Vrunda Natural" class="loader-logo-img" onerror="this.style.display='none'">
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<header id="mainHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.jpeg" alt="Vrunda Natural" class="logo-img" onerror="this.style.display='none'">
+    </a>
+    <nav id="desktopNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="has-dropdown">
+          <a href="index.html#products">Products ▾</a>
+          <ul class="dropdown">
+            <li><a href="index.html#herbal">🌿 Herbal Extracts</a></li>
+            <li><a href="index.html#spices">🌶️ Spices</a></li>
+            <li><a href="index.html#dryfruits">🥜 Dry Fruits</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="Faq.html">FAQ</a></li>
+        <li><a href="careers.html" class="nav-careers">Careers</a></li>
+        <li><a href="Enquiry.html" class="nav-careers" style="background:var(--green)!important;">Get a Quote</a></li>
+      </ul>
+    </nav>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul>
+      <li><a href="index.html"           onclick="closeMobileNav()">Home</a></li>
+      <li><a href="about.html"           onclick="closeMobileNav()">About</a></li>
+      <li><a href="index.html#herbal"    onclick="closeMobileNav()">Herbal Extracts</a></li>
+      <li><a href="index.html#spices"    onclick="closeMobileNav()">Spices</a></li>
+      <li><a href="index.html#dryfruits" onclick="closeMobileNav()">Dry Fruits</a></li>
+      <li><a href="Faq.html"             onclick="closeMobileNav()">FAQ</a></li>
+      <li><a href="careers.html"         onclick="closeMobileNav()">Careers</a></li>
+      <li><a href="Enquiry.html"         onclick="closeMobileNav()">Get a Quote</a></li>
+      <li><a href="index.html#contact"   onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="careers-hero">
+  <div class="careers-hero-overlay"></div>
+  <div class="careers-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);">We're Hiring</span>
+    <h1>Join Our <em>Team</em></h1>
+    <p>Be part of a company that believes in the power of nature.<br>We're growing and looking for passionate people.</p>
+    <a href="#apply" class="btn btn-primary">View Open Positions</a>
+  </div>
+</div>
+
+<!-- WHY JOIN US -->
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Our Culture</span>
+    <h2>Why Vrunda Natural?</h2>
+    <p class="section-sub">A workplace that's as natural and nurturing as our products</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">🌿</span>
+      <h4>Purpose-Driven Work</h4>
+      <p>Work with natural, sustainable products that make a real difference to health and wellness worldwide.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">📈</span>
+      <h4>Growth Opportunities</h4>
+      <p>We invest in our people. Clear career paths and skill development at every level.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🤝</span>
+      <h4>Collaborative Culture</h4>
+      <p>A close-knit team where every voice is heard and ideas are welcomed openly.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏆</span>
+      <h4>Competitive Benefits</h4>
+      <p>Attractive compensation, health benefits, and performance bonuses for top performers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN POSITIONS -->
+<section class="section reveal" id="positions" style="background:var(--sand);border-radius:var(--radius-xl);margin:0 24px;">
+  <div class="section-header">
+    <span class="section-tag">Now Hiring</span>
+    <h2>Open Positions</h2>
+    <p class="section-sub">Find your place in the Vrunda Natural family</p>
+  </div>
+  <div class="job-list">
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Sales Executive – Export Markets</h3>
+        <div class="job-meta">
+          <span class="tag">Full-time</span><span class="tag">Dombivli / Remote</span><span class="tag">Sales</span>
+        </div>
+      </div>
+      <a href="#apply" class="btn btn-primary" style="padding:10px 24px;font-size:.85rem;"
+         onclick="preselectJob('Sales Executive \u2013 Export Markets')">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Quality Control Analyst</h3>
+        <div class="job-meta">
+          <span class="tag">Full-time</span><span class="tag">Dombivli</span><span class="tag">R&amp;D / QC</span>
+        </div>
+      </div>
+      <a href="#apply" class="btn btn-primary" style="padding:10px 24px;font-size:.85rem;"
+         onclick="preselectJob('Quality Control Analyst')">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Digital Marketing Specialist</h3>
+        <div class="job-meta">
+          <span class="tag">Full-time</span><span class="tag">Remote</span><span class="tag">Marketing</span>
+        </div>
+      </div>
+      <a href="#apply" class="btn btn-primary" style="padding:10px 24px;font-size:.85rem;"
+         onclick="preselectJob('Digital Marketing Specialist')">Apply Now</a>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Warehouse &amp; Logistics Coordinator</h3>
+        <div class="job-meta">
+          <span class="tag">Full-time</span><span class="tag">Dombivli</span><span class="tag">Operations</span>
+        </div>
+      </div>
+      <a href="#apply" class="btn btn-primary" style="padding:10px 24px;font-size:.85rem;"
+         onclick="preselectJob('Warehouse &amp; Logistics Coordinator')">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="apply" class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Get Started</span>
+    <h2>Apply Now</h2>
+    <p class="section-sub">We'd love to hear from you — fill in the form below</p>
+  </div>
+  <div class="form-wrap">
+    <h3>Send Us Your Application</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fname">First Name *</label>
+        <input type="text" id="fname" placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name *</label>
+        <input type="text" id="lname" placeholder="Last Name" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="you@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone *</label>
+        <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="position">Position Applying For *</label>
+      <select id="position" required>
+        <option value="" disabled selected>Select a position</option>
+        <option>Sales Executive – Export Markets</option>
+        <option>Quality Control Analyst</option>
+        <option>Digital Marketing Specialist</option>
+        <option>Warehouse &amp; Logistics Coordinator</option>
+        <option>Other / General Application</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="experience">Years of Experience</label>
+      <select id="experience">
+        <option value="" disabled selected>Select experience</option>
+        <option>Fresher (0–1 year)</option>
+        <option>1–3 years</option>
+        <option>3–5 years</option>
+        <option>5+ years</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="message">Cover Letter / Message *</label>
+      <textarea id="message" placeholder="Tell us about yourself and why you'd like to join Vrunda Natural..." required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="resume">Resume / CV Link</label>
+      <input type="text" id="resume" placeholder="Paste Google Drive / LinkedIn link">
+    </div>
+    <button class="btn btn-primary submit-btn" id="submitBtn">Submit Application</button>
+    <div id="successMsg" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.jpeg" alt="Vrunda Natural" class="footer-logo-img" onerror="this.style.display='none'">
+      <p class="footer-tagline">Pure Nature &amp; proven prosperity</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="Faq.html">FAQ</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="Enquiry.html">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="index.html#herbal">Herbal Extracts</a></li>
+        <li><a href="index.html#spices">Spices</a></li>
+        <li><a href="index.html#dryfruits">Dry Fruits</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h5>Contact</h5>
+      <p>Vishnu Nagar, Dombivli (W)<br>Maharashtra, India</p>
+      <p><a href="tel:+917039655835">+91 70396 55835</a></p>
+      <p><a href="mailto:info@vrundanatural.com">info@vrundanatural.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Vrunda Natural Pvt Ltd. All rights reserved.</p>
+    <p>Designed with ♥ for nature lovers</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/917039655835" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="vrunda.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var WEB3FORMS_KEY = '231e17c0-42b7-4e3d-ab2d-0c6ec1517459';
+
+  /* Header — always scrolled on inner pages */
+  var header = document.getElementById('mainHeader');
+  if (header) header.classList.add('scrolled');
+
+  /* Preselect job */
+  window.preselectJob = function (title) {
+    var sel = document.getElementById('position');
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text.trim() === title.trim()) { sel.selectedIndex = i; break; }
+    }
+  };
+
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function validPhone(v) { return /^[\d\s+\-()]{7,20}$/.test(v); }
+
+  window.submitForm = function () {
+    var f = {
+      fname:      document.getElementById('fname').value.trim(),
+      lname:      document.getElementById('lname').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      position:   document.getElementById('position').value,
+      experience: document.getElementById('experience').value || 'Not specified',
+      message:    document.getElementById('message').value.trim(),
+      resume:     document.getElementById('resume').value.trim() || '—'
+    };
+    if (!f.fname)              return showToast('Please enter your First Name.'),     document.getElementById('fname').focus();
+    if (!f.lname)              return showToast('Please enter your Last Name.'),      document.getElementById('lname').focus();
+    if (!f.email)              return showToast('Please enter your Email address.'),  document.getElementById('email').focus();
+    if (!validEmail(f.email))  return showToast('Please enter a valid email.'),       document.getElementById('email').focus();
+    if (!f.phone)              return showToast('Please enter your Phone number.'),   document.getElementById('phone').focus();
+    if (!validPhone(f.phone))  return showToast('Please enter a valid phone number.'),document.getElementById('phone').focus();
+    if (!f.position)           return showToast('Please select a position.'),         document.getElementById('position').focus();
+    if (!f.message)            return showToast('Please write a cover letter.'),      document.getElementById('message').focus();
+    if (f.message.length < 30) return showToast('Cover letter is too short.'),        document.getElementById('message').focus();
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+
+    function finish(ok) {
+      btn.disabled = false; btn.textContent = 'Submit Application';
+      var msg = document.getElementById('successMsg');
+      if (ok) {
+        msg.setAttribute('style','display:block;background:var(--green-pale);border:1.5px solid var(--green);border-radius:var(--radius-sm);padding:16px 24px;color:var(--green);font-weight:600;text-align:center;margin-top:16px;');
+        msg.innerHTML = '✅ Thank you! Your application has been received. We will be in touch within 3–5 business days.';
+      } else {
+        msg.setAttribute('style','display:block;background:var(--earth-pale);border:1.5px solid var(--earth-light);border-radius:var(--radius-sm);padding:16px 24px;color:var(--earth);font-weight:600;text-align:center;margin-top:16px;');
+        msg.innerHTML = '⚠️ Something went wrong. Please try again or contact us directly.';
+      }
+      msg.scrollIntoView({ behavior:'smooth', block:'center' });
+      ['fname','lname','email','phone','message','resume'].forEach(function(id){ document.getElementById(id).value=''; });
+      document.getElementById('position').selectedIndex = 0;
+      document.getElementById('experience').selectedIndex = 0;
+    }
+
+    fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject:   '🧑‍💼 New Job Application: ' + f.position + ' — ' + f.fname + ' ' + f.lname,
+        from_name: 'Vrunda Natural Careers',
+        name:       f.fname + ' ' + f.lname,
+        email:      f.email, phone: f.phone,
+        position:   f.position, experience: f.experience,
+        resume:     f.resume,   message: f.message,
+        timestamp:  new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){ finish(res.success===true); })
+    .catch(function(){ finish(false); });
+  };
+
+  var btn = document.getElementById('submitBtn');
+  if (btn) btn.addEventListener('click', submitForm);
+
+  window.showToast = function (msg, type) {
+    var toast = document.getElementById('vn-toast');
+    var icon  = document.getElementById('vn-toast-icon');
+    var text  = document.getElementById('vn-toast-msg');
+    if (!toast) return;
+    type = type || 'error';
+    icon.textContent = type === 'success' ? '✅' : '⚠️';
+    text.textContent = msg;
+    toast.className  = 'show toast-' + type;
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(function(){ toast.className = 'toast-' + type; }, 4500);
+  };
+  var toastClose = document.getElementById('vn-toast-close');
+  if (toastClose) toastClose.addEventListener('click', function(){
+    var toast = document.getElementById('vn-toast');
+    toast.className = toast.className.replace('show','').trim();
+  });
+})();
+</script>
+</body>
+</html>

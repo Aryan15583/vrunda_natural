@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquiry & Quote | Vrunda Natural</title>
+  <meta name="description" content="Send a product enquiry, bulk order request or export quote to Vrunda Natural Pvt Ltd.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="vn-toast" role="alert" aria-live="assertive">
+  <span id="vn-toast-icon"></span>
+  <span id="vn-toast-msg"></span>
+  <button id="vn-toast-close" aria-label="Dismiss">✕</button>
+</div>
+
+<div id="loader">
+  <div class="loader-inner">
+    <img src="logo.jpeg" alt="Vrunda Natural" class="loader-logo-img" onerror="this.style.display='none'">
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<header id="mainHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.jpeg" alt="Vrunda Natural" class="logo-img" onerror="this.style.display='none'">
+    </a>
+    <nav id="desktopNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="has-dropdown">
+          <a href="index.html#products">Products ▾</a>
+          <ul class="dropdown">
+            <li><a href="index.html#herbal">🌿 Herbal Extracts</a></li>
+            <li><a href="index.html#spices">🌶️ Spices</a></li>
+            <li><a href="index.html#dryfruits">🥜 Dry Fruits</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="careers.html" class="nav-careers">Careers</a></li>
+        <li><a href="enquiry.html" class="nav-careers" style="background:var(--green)!important;">Get a Quote</a></li>
+      </ul>
+    </nav>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <ul>
+      <li><a href="index.html"           onclick="closeMobileNav()">Home</a></li>
+      <li><a href="about.html"           onclick="closeMobileNav()">About</a></li>
+      <li><a href="index.html#herbal"    onclick="closeMobileNav()">Herbal Extracts</a></li>
+      <li><a href="index.html#spices"    onclick="closeMobileNav()">Spices</a></li>
+      <li><a href="index.html#dryfruits" onclick="closeMobileNav()">Dry Fruits</a></li>
+      <li><a href="Faq.html"             onclick="closeMobileNav()">FAQ</a></li>
+      <li><a href="careers.html"         onclick="closeMobileNav()">Careers</a></li>
+      <li><a href="enquiry.html"         onclick="closeMobileNav()">Get a Quote</a></li>
+      <li><a href="index.html#contact"   onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="enq-hero">
+  <div class="enq-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);">Quick Response Guaranteed</span>
+    <h1>Request a <em>Quote</em></h1>
+    <p>Product enquiries, bulk orders, export quotes or custom packaging —<br>tell us what you need and we'll get back within 24 hours.</p>
+  </div>
+</div>
+
+<section class="section reveal">
+  <div class="section-header">
+    <span class="section-tag">Get In Touch</span>
+    <h2>Send Your Enquiry</h2>
+    <p class="section-sub">Select the type of enquiry below and fill in the details</p>
+  </div>
+
+  <div class="enq-tabs">
+    <button class="enq-tab active" data-type="product"   onclick="setType(this)">🌿 Product Enquiry</button>
+    <button class="enq-tab"        data-type="bulk"      onclick="setType(this)">📦 Bulk / Wholesale</button>
+    <button class="enq-tab"        data-type="export"    onclick="setType(this)">🚢 Export / Shipping</button>
+    <button class="enq-tab"        data-type="packaging" onclick="setType(this)">🎁 Custom Packaging</button>
+    <button class="enq-tab"        data-type="general"   onclick="setType(this)">💬 General Enquiry</button>
+  </div>
+
+  <div class="enq-layout">
+    <div class="form-wrap">
+      <div class="form-type-badge" id="formTypeBadge">🌿 Product Enquiry</div>
+
+      <p class="form-section-label">Your Details</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="enqFname">First Name *</label>
+          <input type="text" id="enqFname" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+          <label for="enqLname">Last Name *</label>
+          <input type="text" id="enqLname" placeholder="Last Name" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="enqEmail">Email *</label>
+          <input type="email" id="enqEmail" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="enqPhone">Phone *</label>
+          <input type="tel" id="enqPhone" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="enqCompany">Company / Organisation</label>
+        <input type="text" id="enqCompany" placeholder="Your company name (optional)">
+      </div>
+      <div class="form-group">
+        <label for="enqCountry">Country *</label>
+        <select id="enqCountry" required>
+          <option value="" disabled selected>Select your country</option>
+          <option>India</option><option>United States</option><option>United Kingdom</option>
+          <option>Germany</option><option>Australia</option><option>Canada</option>
+          <option>UAE</option><option>Singapore</option><option>Japan</option>
+          <option>Netherlands</option><option>South Africa</option><option>Other</option>
+        </select>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- PRODUCT ENQUIRY -->
+      <div class="form-section active" id="section-product">
+        <p class="form-section-label">Product Details</p>
+        <div class="form-group">
+          <label for="pe-product">Product of Interest *</label>
+          <select id="pe-product" required>
+            <option value="" disabled selected>Select a product</option>
+            <optgroup label="Herbal Extracts">
+              <option>Moringa Extract</option><option>Beetroot Extract</option>
+              <option>Turmeric / Curcumin</option><option>Ashwagandha</option>
+              <option>Alpinia Galanga</option><option>Terminalia Arjuna</option>
+              <option>Potato Starch</option><option>Onion Powder</option>
+            </optgroup>
+            <optgroup label="Spices">
+              <option>Black Pepper</option><option>Cinnamon</option>
+              <option>Cardamom</option><option>Bay Leaf</option>
+            </optgroup>
+            <optgroup label="Dry Fruits">
+              <option>Almond</option><option>Cashews</option>
+              <option>Raisins</option><option>Pistachio</option>
+            </optgroup>
+            <option>Other / Not Listed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Purpose of Use</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="pe-purpose" value="Personal Use"> Personal Use</label>
+            <label class="radio-option"><input type="radio" name="pe-purpose" value="Retail Resale"> Retail / Resale</label>
+            <label class="radio-option"><input type="radio" name="pe-purpose" value="Manufacturing"> Manufacturing</label>
+            <label class="radio-option"><input type="radio" name="pe-purpose" value="Research"> Research</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pe-quantity">Estimated Quantity</label>
+          <select id="pe-quantity">
+            <option value="" disabled selected>Select quantity range</option>
+            <option>Sample (under 1 kg)</option><option>Small (1–50 kg)</option>
+            <option>Medium (50–500 kg)</option><option>Large (500 kg – 1 MT)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Certifications Required</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="pe-cert" value="COA"> Certificate of Analysis (COA)</label>
+            <label><input type="checkbox" name="pe-cert" value="Organic"> Organic Certified</label>
+            <label><input type="checkbox" name="pe-cert" value="FSSAI"> FSSAI</label>
+            <label><input type="checkbox" name="pe-cert" value="None"> No specific requirement</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pe-message">Product Specifications / Questions *</label>
+          <textarea id="pe-message" placeholder="Describe what you need — specific grade, active compound %, form (powder/liquid), or any questions." required></textarea>
+        </div>
+      </div>
+
+      <!-- BULK / WHOLESALE -->
+      <div class="form-section" id="section-bulk">
+        <p class="form-section-label">Order Details</p>
+        <div class="form-group">
+          <label for="bw-products">Products Required *</label>
+          <select id="bw-products" required>
+            <option value="" disabled selected>Select primary product</option>
+            <optgroup label="Herbal Extracts">
+              <option>Moringa Extract</option><option>Beetroot Extract</option>
+              <option>Turmeric / Curcumin</option><option>Ashwagandha</option>
+              <option>Alpinia Galanga</option><option>Terminalia Arjuna</option>
+              <option>Potato Starch</option><option>Onion Powder</option>
+            </optgroup>
+            <optgroup label="Spices">
+              <option>Black Pepper</option><option>Cinnamon</option>
+              <option>Cardamom</option><option>Bay Leaf</option>
+            </optgroup>
+            <optgroup label="Dry Fruits">
+              <option>Almond</option><option>Cashews</option>
+              <option>Raisins</option><option>Pistachio</option>
+            </optgroup>
+            <option>Multiple Products (list below)</option>
+          </select>
+          <p class="field-hint">If ordering multiple products, list them in the message below.</p>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bw-qty">Order Quantity *</label>
+            <select id="bw-qty" required>
+              <option value="" disabled selected>Select quantity</option>
+              <option>50–200 kg</option><option>200–500 kg</option>
+              <option>500 kg – 1 MT</option><option>1 MT – 5 MT</option><option>5 MT+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bw-freq">Order Frequency</label>
+            <select id="bw-freq">
+              <option value="" disabled selected>How often?</option>
+              <option>One-time order</option><option>Monthly</option>
+              <option>Quarterly</option><option>Bi-annually</option><option>Ongoing / as needed</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="bw-timeline">Expected Delivery Timeline</label>
+          <select id="bw-timeline">
+            <option value="" disabled selected>Select timeline</option>
+            <option>Within 2 weeks</option><option>Within 1 month</option>
+            <option>1–3 months</option><option>Flexible</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Business Type</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="bw-biz" value="Retailer"> Retailer</label>
+            <label class="radio-option"><input type="radio" name="bw-biz" value="Distributor"> Distributor</label>
+            <label class="radio-option"><input type="radio" name="bw-biz" value="Manufacturer"> Manufacturer</label>
+            <label class="radio-option"><input type="radio" name="bw-biz" value="Trader"> Trader</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="bw-message">Additional Requirements *</label>
+          <textarea id="bw-message" placeholder="List all products and quantities, special grade requirements, preferred payment terms, etc." required></textarea>
+        </div>
+      </div>
+
+      <!-- EXPORT / SHIPPING -->
+      <div class="form-section" id="section-export">
+        <p class="form-section-label">Export Details</p>
+        <div class="form-group">
+          <label for="ex-product">Product(s) for Export *</label>
+          <select id="ex-product" required>
+            <option value="" disabled selected>Select product</option>
+            <optgroup label="Herbal Extracts">
+              <option>Moringa Extract</option><option>Beetroot Extract</option>
+              <option>Turmeric / Curcumin</option><option>Ashwagandha</option>
+              <option>Alpinia Galanga</option><option>Terminalia Arjuna</option>
+              <option>Potato Starch</option><option>Onion Powder</option>
+              <option>Fox Nut</option>
+            </optgroup>
+            <optgroup label="Spices">
+              <option>Black Pepper</option><option>Cinnamon</option>
+              <option>Cardamom</option><option>Bay Leaf</option>
+            </optgroup>
+            <optgroup label="Dry Fruits">
+              <option>Almond</option><option>Cashews</option>
+              <option>Raisins</option><option>Pistachio</option>
+              <option>Dried Fig</option><option>Dehydrated Fruits</option>
+            </optgroup>
+            <option>Multiple Products</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ex-qty">Shipment Quantity *</label>
+            <select id="ex-qty" required>
+              <option value="" disabled selected>Select quantity</option>
+              <option>Under 100 kg</option><option>100–500 kg</option>
+              <option>500 kg – 1 MT</option><option>1 MT – 5 MT</option><option>5 MT+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ex-port">Destination Port / City *</label>
+            <input type="text" id="ex-port" placeholder="e.g. Hamburg, Los Angeles" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Preferred Shipping Mode</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="ex-mode" value="Air Freight"> ✈️ Air Freight</label>
+            <label class="radio-option"><input type="radio" name="ex-mode" value="Sea Freight"> 🚢 Sea Freight</label>
+            <label class="radio-option"><input type="radio" name="ex-mode" value="Courier"> 📦 Courier (DHL/FedEx)</label>
+            <label class="radio-option"><input type="radio" name="ex-mode" value="Flexible"> 🔄 Flexible</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Preferred Incoterms</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="ex-inco" value="EXW"> EXW</label>
+            <label class="radio-option"><input type="radio" name="ex-inco" value="FOB"> FOB</label>
+            <label class="radio-option"><input type="radio" name="ex-inco" value="CIF"> CIF</label>
+            <label class="radio-option"><input type="radio" name="ex-inco" value="Not sure"> Not sure</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Documents Needed</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="ex-docs" value="COA"> Certificate of Analysis (COA)</label>
+            <label><input type="checkbox" name="ex-docs" value="Phyto"> Phytosanitary Certificate</label>
+            <label><input type="checkbox" name="ex-docs" value="Origin"> Certificate of Origin</label>
+            <label><input type="checkbox" name="ex-docs" value="MSDS"> MSDS</label>
+            <label><input type="checkbox" name="ex-docs" value="Organic"> Organic Certificate</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ex-message">Shipment Notes / Additional Requirements *</label>
+          <textarea id="ex-message" placeholder="Delivery deadline, special handling, import regulations, or questions about the export process." required></textarea>
+        </div>
+      </div>
+
+      <!-- CUSTOM PACKAGING -->
+      <div class="form-section" id="section-packaging">
+        <p class="form-section-label">Packaging Requirements</p>
+        <div class="form-group">
+          <label for="cp-product">Product to be Packaged *</label>
+          <select id="cp-product" required>
+            <option value="" disabled selected>Select a product</option>
+            <optgroup label="Herbal Extracts">
+              <option>Moringa Extract</option><option>Beetroot Extract</option>
+              <option>Turmeric / Curcumin</option><option>Ashwagandha</option>
+              <option>Alpinia Galanga</option><option>Terminalia Arjuna</option>
+              <option>Potato Starch</option><option>Onion Powder</option>
+            </optgroup>
+            <optgroup label="Spices">
+              <option>Black Pepper</option><option>Cinnamon</option>
+              <option>Cardamom</option><option>Bay Leaf</option>
+            </optgroup>
+            <optgroup label="Dry Fruits">
+              <option>Almond</option><option>Cashews</option>
+              <option>Raisins</option><option>Pistachio</option>
+            </optgroup>
+            <option>Multiple Products</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Packaging Type</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="cp-type" value="Pouch"> Foil Pouch</label>
+            <label class="radio-option"><input type="radio" name="cp-type" value="Drum"> HDPE Drum</label>
+            <label class="radio-option"><input type="radio" name="cp-type" value="Kraft Bag"> Kraft Bag</label>
+            <label class="radio-option"><input type="radio" name="cp-type" value="Box"> Branded Box</label>
+            <label class="radio-option"><input type="radio" name="cp-type" value="Custom"> Custom / Other</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cp-size">Pack Size *</label>
+            <select id="cp-size" required>
+              <option value="" disabled selected>Select pack size</option>
+              <option>50 g / 100 g</option><option>250 g / 500 g</option>
+              <option>1 kg</option><option>5 kg</option>
+              <option>10 kg</option><option>25 kg</option><option>Custom size</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cp-units">Number of Units *</label>
+            <input type="number" id="cp-units" placeholder="e.g. 500" min="1" required>
+            <p class="field-hint">Minimum quantities apply for custom branded packaging.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Private Label / Branding</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="cp-brand" value="Yes – I have a design"> ✅ Yes – I have a design</label>
+            <label class="radio-option"><input type="radio" name="cp-brand" value="Yes – Need design help"> 🎨 Yes – Need design help</label>
+            <label class="radio-option"><input type="radio" name="cp-brand" value="No – standard label"> No – standard label</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cp-message">Packaging Brief / Additional Details *</label>
+          <textarea id="cp-message" placeholder="Colours, label information, special materials, compliance text (FDA, EFSA), or upload references via email after submission." required></textarea>
+        </div>
+      </div>
+
+      <!-- GENERAL ENQUIRY -->
+      <div class="form-section" id="section-general">
+        <p class="form-section-label">Your Enquiry</p>
+        <div class="form-group">
+          <label>Topic</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="gen-topic" value="Product Information"> 🌿 Product Info</label>
+            <label class="radio-option"><input type="radio" name="gen-topic" value="Partnership"> 🤝 Partnership</label>
+            <label class="radio-option"><input type="radio" name="gen-topic" value="Pricing"> 💰 Pricing</label>
+            <label class="radio-option"><input type="radio" name="gen-topic" value="Other"> 💬 Other</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gen-subject">Subject *</label>
+          <input type="text" id="gen-subject" placeholder="Brief subject of your enquiry" required>
+        </div>
+        <div class="form-group">
+          <label for="gen-message">Your Message *</label>
+          <textarea id="gen-message" placeholder="Tell us what's on your mind." required style="min-height:160px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preferred Contact Method</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="gen-contact" value="Email"> ✉️ Email</label>
+            <label class="radio-option"><input type="radio" name="gen-contact" value="Phone"> 📞 Phone</label>
+            <label class="radio-option"><input type="radio" name="gen-contact" value="WhatsApp"> 💬 WhatsApp</label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <button class="btn btn-primary" id="enqSubmitBtn"
+              style="width:100%;justify-content:center;border:none;font-size:1rem;padding:16px;">
+        Send Enquiry
+      </button>
+      <div class="enq-success" id="enqSuccess">
+        ✅ Thank you! Your enquiry has been received. Our team will respond within 24 hours.
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="info-cards">
+      <div class="info-card" id="sidebar-dynamic"></div>
+      <div class="info-card">
+        <h4>⏱ Response Time</h4>
+        <p>We respond to all enquiries within <strong>24 business hours</strong>. For urgent requests, contact us via WhatsApp.</p>
+      </div>
+      <div class="info-card">
+        <h4>📞 Call Us</h4>
+        <p><a href="tel:+917039655835">+91 70396 55835</a><br>Mon – Fri, 9:00 AM – 5:00 PM IST</p>
+      </div>
+      <div class="info-card">
+        <h4>✉️ Email Us</h4>
+        <p><a href="/cdn-cgi/l/email-protection#1a73747c755a6c686f747e7b747b6e6f687b7634797577"><span class="__cf_email__" data-cfemail="751c1b131a350307001b11141b1401000714195b161a18">[email&#160;protected]</span></a></p>
+      </div>
+      <div class="info-card">
+        <h4>💬 WhatsApp</h4>
+        <p>For quick replies, chat with us directly on WhatsApp.</p>
+        <a href="https://wa.me/919819115849" target="_blank" rel="noopener"
+           class="btn btn-outline" style="margin-top:12px;padding:10px 20px;font-size:.86rem;display:inline-flex;">
+          Open WhatsApp ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip reveal">
+  <div class="stat"><span class="stat-num">24h</span><span class="stat-label">Response Time</span></div>
+  <div class="stat"><span class="stat-num">10+</span><span class="stat-label">Export Countries</span></div>
+  <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Products</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Natural</span></div>
+</div>
+
+<section class="section reveal" style="text-align:center;padding:60px 36px;">
+  <span class="section-tag">Have Questions?</span>
+  <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);margin:12px 0 16px;color:var(--text-dark);">Check Our FAQ First</h2>
+  <p style="color:var(--text-light);max-width:480px;margin:0 auto 28px;">Find quick answers about minimum order quantities, certifications, shipping, payment terms and more.</p>
+  <a href="faq.html" class="btn btn-primary">View FAQ →</a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.jpeg" alt="Vrunda Natural" class="footer-logo-img" onerror="this.style.display='none'">
+      <p class="footer-tagline">Pure Nature &amp; proven prosperity</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="enquiry.html">Get a Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="index.html#herbal">Herbal Extracts</a></li>
+        <li><a href="index.html#spices">Spices</a></li>
+        <li><a href="index.html#dryfruits">Dry Fruits</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h5>Contact</h5>
+      <p>Vishnu Nagar, Dombivli (W)<br>Maharashtra, India</p>
+      <p><a href="tel:+917039655835">+91 70396 55835</a></p>
+      <p><a href="/cdn-cgi/l/email-protection#0c65626a634c7a7e7962686d626d78797e6d60226f6361"><span class="__cf_email__" data-cfemail="4f262129200f393d3a212b2e212e3b3a3d2e23612c2022">[email&#160;protected]</span></a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Vrunda Natural Pvt Ltd. All rights reserved.</p>
+    <p>Designed with ♥ for nature lovers</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/917039655835" class="whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script src="vrunda.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function () {
+  'use strict';
+
+  var currentType = 'product';
+
+  /* ── FIX: Define updateSidebar (was missing — this was the bug) ── */
+  var sidebarContent = {
+    product: {
+      icon: '🌿', title: 'Product Enquiry',
+      body: 'Ask about any of our herbal extracts, spices or dry fruits. Include the grade, quantity and intended use for a faster response.'
+    },
+    bulk: {
+      icon: '📦', title: 'Bulk & Wholesale',
+      body: 'We supply bulk orders from 50 kg upwards. Mention your target price, required certifications and delivery location for a tailored quote.'
+    },
+    export: {
+      icon: '🚢', title: 'Export & Shipping',
+      body: 'We export to 10+ countries. Provide your destination port and preferred Incoterms so we can prepare an accurate shipping quote.'
+    },
+    packaging: {
+      icon: '🎁', title: 'Custom Packaging',
+      body: 'We offer private-label and custom packaging. Minimum quantities apply — mention your pack size and branding needs below.'
+    },
+    general: {
+      icon: '💬', title: 'General Enquiry',
+      body: 'Have a question that doesn\'t fit the other categories? We\'re happy to help with anything about our company, products or partnerships.'
+    }
+  };
+
+  function updateSidebar(type) {
+    var el = document.getElementById('sidebar-dynamic');
+    if (!el) return;
+    var info = sidebarContent[type] || sidebarContent.product;
+    el.innerHTML =
+      '<h4>' + info.icon + ' ' + info.title + '</h4>' +
+      '<p>' + info.body + '</p>';
+  }
+
+  /* ── Tab switcher ── */
+  window.setType = function (btn) {
+    currentType = btn.dataset.type;
+    document.querySelectorAll('.enq-tab').forEach(function (t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('formTypeBadge').textContent = btn.textContent.trim();
+    document.querySelectorAll('.form-section').forEach(function (s) { s.classList.remove('active'); });
+    var target = document.getElementById('section-' + currentType);
+    if (target) target.classList.add('active');
+    updateSidebar(currentType);
+    document.getElementById('enqSuccess').style.display = 'none';
+  };
+
+  // Init sidebar on load
+  updateSidebar('product');
+
+  /* ── Loader ── */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var el = document.getElementById('loader');
+      if (el) el.classList.add('hidden');
+    }, 900);
+  });
+
+  /* ── Header scroll ── */
+  var header = document.getElementById('mainHeader');
+  if (header) {
+    header.classList.add('scrolled');
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('scrolled', window.scrollY > 0);
+    }, { passive: true });
+  }
+
+  /* ── Hamburger ── */
+  var hbg  = document.getElementById('hamburger');
+  var mnav = document.getElementById('mobileNav');
+  if (hbg && mnav) {
+    hbg.addEventListener('click', function () {
+      var open = mnav.classList.toggle('open');
+      hbg.classList.toggle('active', open);
+      hbg.setAttribute('aria-expanded', String(open));
+      mnav.setAttribute('aria-hidden', String(!open));
+    });
+  }
+  window.closeMobileNav = function () {
+    if (!mnav) return;
+    mnav.classList.remove('open');
+    if (hbg) { hbg.classList.remove('active'); hbg.setAttribute('aria-expanded', 'false'); }
+    mnav.setAttribute('aria-hidden', 'true');
+  };
+
+  /* ── Scroll reveal ── */
+  function revealCheck() {
+    var wh = window.innerHeight;
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (el.getBoundingClientRect().top < wh - 80) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', revealCheck, { passive: true });
+  revealCheck();
+
+  /* ── Validation helpers ── */
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function validPhone(v) { return /^[\d\s+\-()\u0000-\u007F]{7,20}$/.test(v); }
+  function getChecked(name) {
+    return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+                .map(function (el) { return el.value; }).join(', ') || '—';
+  }
+  function getRadio(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '—';
+  }
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  /* ── Collect type-specific data ── */
+  function collectTypeData() {
+    switch (currentType) {
+      case 'product':   return { product: val('pe-product'), purpose: getRadio('pe-purpose'), quantity: val('pe-quantity'), certs: getChecked('pe-cert'), message: val('pe-message') };
+      case 'bulk':      return { products: val('bw-products'), quantity: val('bw-qty'), frequency: val('bw-freq'), timeline: val('bw-timeline'), businessType: getRadio('bw-biz'), message: val('bw-message') };
+      case 'export':    return { product: val('ex-product'), quantity: val('ex-qty'), destPort: val('ex-port'), shippingMode: getRadio('ex-mode'), incoterms: getRadio('ex-inco'), documents: getChecked('ex-docs'), message: val('ex-message') };
+      case 'packaging': return { product: val('cp-product'), packType: getRadio('cp-type'), packSize: val('cp-size'), units: val('cp-units'), branding: getRadio('cp-brand'), message: val('cp-message') };
+      case 'general':   return { topic: getRadio('gen-topic'), subject: val('gen-subject'), message: val('gen-message'), contactPref: getRadio('gen-contact') };
+    }
+    return {};
+  }
+
+  /* ── Type-specific validation ── */
+  function validateTypeFields() {
+    switch (currentType) {
+      case 'product':
+        if (!val('pe-product')) { showToast('Please select a product.'); document.getElementById('pe-product').focus(); return false; }
+        if (!val('pe-message') || val('pe-message').length < 20) { showToast('Please describe your product requirements in more detail.'); document.getElementById('pe-message').focus(); return false; }
+        break;
+      case 'bulk':
+        if (!val('bw-products')) { showToast('Please select a product.'); document.getElementById('bw-products').focus(); return false; }
+        if (!val('bw-qty'))      { showToast('Please select an order quantity.'); document.getElementById('bw-qty').focus(); return false; }
+        if (!val('bw-message') || val('bw-message').length < 20) { showToast('Please describe your bulk order requirements.'); document.getElementById('bw-message').focus(); return false; }
+        break;
+      case 'export':
+        if (!val('ex-product')) { showToast('Please select a product.'); document.getElementById('ex-product').focus(); return false; }
+        if (!val('ex-qty'))     { showToast('Please select shipment quantity.'); document.getElementById('ex-qty').focus(); return false; }
+        if (!val('ex-port'))    { showToast('Please enter the destination port/city.'); document.getElementById('ex-port').focus(); return false; }
+        if (!val('ex-message') || val('ex-message').length < 20) { showToast('Please provide shipment notes.'); document.getElementById('ex-message').focus(); return false; }
+        break;
+      case 'packaging':
+        if (!val('cp-product')) { showToast('Please select a product.'); document.getElementById('cp-product').focus(); return false; }
+        if (!val('cp-size'))    { showToast('Please select a pack size.'); document.getElementById('cp-size').focus(); return false; }
+        if (!val('cp-units'))   { showToast('Please enter the number of units.'); document.getElementById('cp-units').focus(); return false; }
+        if (!val('cp-message') || val('cp-message').length < 20) { showToast('Please describe your packaging requirements.'); document.getElementById('cp-message').focus(); return false; }
+        break;
+      case 'general':
+        if (!val('gen-subject')) { showToast('Please enter a subject.'); document.getElementById('gen-subject').focus(); return false; }
+        if (!val('gen-message') || val('gen-message').length < 20) { showToast('Please describe your enquiry in more detail.'); document.getElementById('gen-message').focus(); return false; }
+        break;
+    }
+    return true;
+  }
+
+  /* ── Web3Forms Key ── */
+  var WEB3FORMS_KEY = '8a4334c1-fd36-4269-8c82-0422d42c436a';
+
+  /* ── Submit ── */
+  window.submitEnquiry = function () {
+    var fname   = val('enqFname');
+    var lname   = val('enqLname');
+    var email   = val('enqEmail');
+    var phone   = val('enqPhone');
+    var country = val('enqCountry');
+
+    if (!fname)             { showToast('Please enter your First Name.');         document.getElementById('enqFname').focus();   return; }
+    if (!lname)             { showToast('Please enter your Last Name.');          document.getElementById('enqLname').focus();   return; }
+    if (!email)             { showToast('Please enter your Email.');              document.getElementById('enqEmail').focus();   return; }
+    if (!validEmail(email)) { showToast('Please enter a valid email.');           document.getElementById('enqEmail').focus();   return; }
+    if (!phone)             { showToast('Please enter your Phone number.');       document.getElementById('enqPhone').focus();   return; }
+    if (!validPhone(phone)) { showToast('Please enter a valid phone number.');    document.getElementById('enqPhone').focus();   return; }
+    if (!country)           { showToast('Please select your country.');           document.getElementById('enqCountry').focus(); return; }
+    if (!validateTypeFields()) return;
+
+    var btn = document.getElementById('enqSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    var typeLabels = { product: 'Product Enquiry', bulk: 'Bulk / Wholesale', export: 'Export Quote', packaging: 'Custom Packaging', general: 'General' };
+    var typeData   = collectTypeData();
+
+    var payload = Object.assign({
+      access_key:   WEB3FORMS_KEY,
+      subject:      '📋 New Enquiry [' + (typeLabels[currentType] || currentType) + '] from ' + fname + ' ' + lname,
+      from_name:    'Vrunda Natural Enquiry',
+      name:         fname + ' ' + lname,
+      email:        email,
+      phone:        phone,
+      company:      val('enqCompany') || '—',
+      country:      country,
+      enquiry_type: typeLabels[currentType] || currentType,
+      timestamp:    new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    }, typeData);
+
+    fetch('https://api.web3forms.com/submit', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify(payload)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      if (res.success) {
+        onSubmitSuccess(btn);
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send Enquiry';
+        showToast('Submission failed: ' + (res.message || 'Please try again.'));
+      }
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Send Enquiry';
+      showToast('Network error. Please check your connection and try again.');
+    });
+  };
+
+  function onSubmitSuccess(btn) {
+    btn.disabled = false;
+    btn.textContent = 'Send Enquiry';
+    var success = document.getElementById('enqSuccess');
+    success.style.display = 'block';
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    ['enqFname','enqLname','enqEmail','enqPhone','enqCompany'].forEach(function (id) {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('enqCountry').selectedIndex = 0;
+
+    var activeSection = document.querySelector('.form-section.active');
+    if (activeSection) {
+      activeSection.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), textarea, select').forEach(function (el) {
+        if (el.tagName === 'SELECT') { el.selectedIndex = 0; } else { el.value = ''; }
+      });
+      activeSection.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(el){ el.checked = false; });
+    }
+  }
+
+  /* ─── TOAST ─────────────────────────────── */
+  window.showToast = function (msg, type) {
+    var toast = document.getElementById('vn-toast');
+    var icon  = document.getElementById('vn-toast-icon');
+    var text  = document.getElementById('vn-toast-msg');
+    if (!toast) return;
+    type = type || 'error';
+    icon.textContent = type === 'success' ? '✅' : '⚠️';
+    text.textContent = msg;
+    toast.className  = 'show toast-' + type;
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(function () { toast.className = 'toast-' + type; }, 4500);
+  };
+  document.getElementById('vn-toast-close').addEventListener('click', function () {
+    var toast = document.getElementById('vn-toast');
+    toast.className = toast.className.replace('show', '').trim();
+  });
+
+})();
+</script>
+</body>
+</html>
