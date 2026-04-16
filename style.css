@@ -1176,3 +1176,111 @@ body.dark #vn-toast.toast-success { background: #1a2e18; border-color: var(--gre
   .about-highlights { grid-template-columns: 1fr; }
   .hero-text h1 { font-size: 1.4rem; }
 }
+
+/* ============================================================
+   SMOOTH MOBILE NAVIGATION DRAWER
+   Added to support vrunda.js auto-injection
+   ============================================================ */
+
+@media (max-width: 991px) {
+  /* Prevent background scrolling when menu is open */
+  body.nav-open {
+    overflow: hidden !important;
+    touch-action: none;
+  }
+
+  /* Blurred Backdrop Overlay */
+  #nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.38s ease;
+  }
+  #nav-backdrop.visible {
+    opacity: 1;
+  }
+
+  /* The Slide-in Drawer */
+  #mobileNav {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Start off-screen */
+    width: 280px;
+    height: 100%;
+    background: #ffffff; /* Adjust to your theme color */
+    z-index: 10000;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex !important;
+    flex-direction: column;
+    padding: 80px 20px 40px;
+  }
+
+  /* Active state for Drawer */
+  #mobileNav.open {
+    transform: translateX(-300px);
+  }
+
+  /* Navigation Links Styling */
+  #mobileNav a {
+    display: block;
+    padding: 15px 10px;
+    font-size: 1.1rem;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.2s;
+  }
+
+  #mobileNav a:active {
+    background: rgba(0,0,0,0.03);
+    color: var(--green, #2e7d32);
+  }
+
+  /* Close Button (Injected by JS) */
+  #mobileNavClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    line-height: 1;
+  }
+
+  /* Brand Label (Injected by JS) */
+  #mobileNavBrand {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    font-weight: bold;
+    color: var(--green, #2e7d32);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  /* Hamburger Icon Animation Support */
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #333;
+    transition: 0.3s;
+  }
+}
+
+/* Hide these elements on desktop */
+@media (min-width: 992px) {
+  #nav-backdrop, #mobileNavClose, #mobileNavBrand {
+    display: none !important;
+  }
+}
