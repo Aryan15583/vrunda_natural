@@ -90,24 +90,91 @@
     window.addEventListener('scroll', updateHeader, { passive: true });
   }
 
-  /* ── 5. HAMBURGER / MOBILE NAV ───────────────────────────── */
+  /* ── 5. HAMBURGER / MOBILE NAV — smooth drawer ──────────────── */
+
+  // Auto-inject hamburger button if the HTML page doesn't already have one
+  if (!document.getElementById('hamburger')) {
+    var hbgBtn = document.createElement('button');
+    hbgBtn.id        = 'hamburger';
+    hbgBtn.className = 'hamburger';
+    hbgBtn.setAttribute('aria-label', 'Toggle navigation');
+    hbgBtn.setAttribute('aria-expanded', 'false');
+    hbgBtn.innerHTML = '<span></span><span></span><span></span>';
+    var hInner = document.querySelector('.header-inner');
+    if (hInner) hInner.appendChild(hbgBtn);
+  }
+
+  // Inject the backdrop overlay (dimmed + blurred background when nav is open)
+  var backdrop = document.getElementById('nav-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.id = 'nav-backdrop';
+    document.body.appendChild(backdrop);
+  }
+
   var hamburger = document.getElementById('hamburger');
-  var mobileNav = document.getElementById('mobileNav');
-  if (hamburger && mobileNav) {
-    hamburger.addEventListener('click', function () {
-      var isOpen = mobileNav.classList.toggle('open');
-      hamburger.classList.toggle('active', isOpen);
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      mobileNav.setAttribute('aria-hidden', String(!isOpen));
+  var mobileNav  = document.getElementById('mobileNav');
+
+  // Inject close button + brand name inside the drawer header
+  if (mobileNav && !document.getElementById('mobileNavClose')) {
+    var closeBtn = document.createElement('button');
+    closeBtn.id = 'mobileNavClose';
+    closeBtn.setAttribute('aria-label', 'Close navigation');
+    closeBtn.innerHTML = '&#10005;';
+    mobileNav.appendChild(closeBtn);
+    closeBtn.addEventListener('click', closeMobileNav);
+
+    var brand = document.createElement('span');
+    brand.id          = 'mobileNavBrand';
+    brand.textContent = 'Vrunda Natural';
+    mobileNav.appendChild(brand);
+  }
+
+  function openMobileNav() {
+    if (!mobileNav || !hamburger) return;
+    mobileNav.classList.add('open');
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('nav-open');
+    backdrop.style.display = 'block';
+    requestAnimationFrame(function () {
+      backdrop.classList.add('visible');
     });
   }
+
   window.closeMobileNav = function () {
     if (!mobileNav || !hamburger) return;
     mobileNav.classList.remove('open');
     hamburger.classList.remove('active');
     hamburger.setAttribute('aria-expanded', 'false');
     mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('nav-open');
+    backdrop.classList.remove('visible');
+    setTimeout(function () {
+      if (!backdrop.classList.contains('visible')) backdrop.style.display = 'none';
+    }, 380);
   };
+
+  if (hamburger) {
+    hamburger.addEventListener('click', function () {
+      if (mobileNav && mobileNav.classList.contains('open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
+
+  // Close on backdrop tap
+  backdrop.addEventListener('click', closeMobileNav);
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) {
+      closeMobileNav();
+    }
+  });
 
   /* ── 6. ACTIVE NAV LINK — highlight current page ─────────── */
   var currentPath = location.pathname.split('/').pop() || 'index.html';
